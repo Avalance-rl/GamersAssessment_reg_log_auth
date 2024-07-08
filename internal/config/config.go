@@ -14,7 +14,8 @@ func Init() {
 var CFG Config
 
 type Config struct {
-	Database `yaml:"database"`
+	Database     `yaml:"database"`
+	JwtSecretKey string `yaml:"jwt_secret_key"`
 }
 
 type Database struct {

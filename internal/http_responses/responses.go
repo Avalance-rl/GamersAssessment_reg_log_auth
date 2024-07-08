@@ -42,6 +42,18 @@ func FailWrongPassword(c *gin.Context) {
 	})
 }
 
+func FailRefreshTokenMissing(c *gin.Context) {
+	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+		"fail": "Refresh token is missing",
+	})
+}
+
+func FailRefreshTokenIsObsolete(c *gin.Context) {
+	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+		"fail": "Refresh token is obsolete",
+	})
+}
+
 func ExecRegister(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Registration was successful",

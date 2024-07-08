@@ -1,9 +1,11 @@
 package handlers
 
 import (
+	"dev/reglogauth/internal/config"
 	"dev/reglogauth/internal/database"
 	"dev/reglogauth/internal/http_responses"
 	"dev/reglogauth/internal/models"
+	"fmt"
 	"log"
 	"math/rand"
 	"net/http"
@@ -18,7 +20,7 @@ const (
 	RefreshLife = 3600 * 24
 )
 
-var jwtSecretKey = []byte("very-secret-key")
+var jwtSecretKey = []byte(config.CFG.JwtSecretKey)
 
 func Authentication(c *gin.Context) {
 	body := models.AuthenticationRequest{}
@@ -26,6 +28,7 @@ func Authentication(c *gin.Context) {
 		http_responses.FailToReadBody(c)
 		return
 	}
+	fmt.Println(config.CFG.JwtSecretKey)
 	password := database.FindUser(body.Email)
 	err := bcrypt.CompareHashAndPassword([]byte(password), []byte(body.Password))
 	if err != nil {
@@ -55,7 +58,7 @@ func Authentication(c *gin.Context) {
 		Name:     "refresh_token",
 		Value:    refreshID,
 		MaxAge:   RefreshLife,
-		Path:     "/",
+		Path:     "/api/auth",
 		HttpOnly: true,
 	}
 	c.SetCookie(

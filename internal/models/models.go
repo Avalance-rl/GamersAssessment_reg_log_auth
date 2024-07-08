@@ -2,7 +2,6 @@ package models
 
 import "time"
 
-// todo: разобраться с omitempty
 type User struct {
 	Email            string `bson:"email,omitempty"`
 	UserName         string `bson:"user_name,omitempty"`
@@ -11,8 +10,9 @@ type User struct {
 }
 
 type Token struct {
-	Token string `bson:"token,omitempty"`
-	Email string `bson:"email,omitempty"`
+	Token        string    `bson:"token,omitempty"`
+	Email        string    `bson:"email,omitempty"`
+	CreationTime time.Time `bson:"creation_time"`
 }
 
 type RegisterRequest struct {
