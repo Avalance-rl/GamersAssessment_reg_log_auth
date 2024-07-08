@@ -5,7 +5,6 @@ import (
 	"dev/reglogauth/internal/database"
 	"dev/reglogauth/internal/http_responses"
 	"dev/reglogauth/internal/models"
-	"fmt"
 	"log"
 	"math/rand"
 	"net/http"
@@ -42,7 +41,6 @@ func Authentication(c *gin.Context) {
 		http_responses.FailToReadBody(c)
 		return
 	}
-	fmt.Println(config.CFG.JwtSecretKey)
 	password := database.FindUser(body.Email)
 	err := bcrypt.CompareHashAndPassword([]byte(password), []byte(body.Password))
 	if err != nil {

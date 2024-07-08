@@ -7,6 +7,7 @@ COPY internal ./internal
 COPY docs ./docs
 COPY go.mod go.sum ./
 
+RUN export GOPROXY=direct
 RUN go mod download
 
 WORKDIR /build/cmd/app
