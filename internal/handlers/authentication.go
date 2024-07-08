@@ -22,6 +22,20 @@ const (
 
 var jwtSecretKey = []byte(config.CFG.JwtSecretKey)
 
+// @BasePath /auth/api/
+
+// Authentication godoc
+// @Summary authenticates the user
+// @Schemes application/json
+// @Description accepts json sent by the user as input and authorize it
+// @Tags authentication
+// @Accept json
+// @Produce json
+// @Param input body models.AuthenticationRequest true "account info"
+// @Success 200 "message: Authentication was successful; access_token"
+// @Failure 400 "error: Failed to read body"
+// @Failure 403 "fail": "You entered the wrong password or email"
+// @Router /api/auth/log [post]
 func Authentication(c *gin.Context) {
 	body := models.AuthenticationRequest{}
 	if c.Bind(&body) != nil {
@@ -72,7 +86,7 @@ func Authentication(c *gin.Context) {
 	)
 
 	c.JSON(http.StatusOK, gin.H{
-		"AccessToken":  signedAccessToken,
-		"RefreshToken": signedRefreshToken,
+		"message":      "Authentication was successful",
+		"access_token": signedAccessToken,
 	})
 }
