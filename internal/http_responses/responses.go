@@ -30,20 +30,38 @@ func FailIncorrectPassword(c *gin.Context) {
 	})
 }
 
-func ErrorOnServer(c *gin.Context) {
-	c.JSON(http.StatusInternalServerError, gin.H{
-		"error": "Error on the server. Please, try again later",
-	})
-}
-
 func FailCurrentEmailAlreadyExists(c *gin.Context) {
 	c.JSON(http.StatusConflict, gin.H{
 		"fail": "This email already exists",
 	})
 }
 
+func FailWrongPassword(c *gin.Context) {
+	c.JSON(http.StatusForbidden, gin.H{
+		"fail": "You entered the wrong password or email",
+	})
+}
+
+func FailRefreshTokenMissing(c *gin.Context) {
+	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+		"fail": "Refresh token is missing",
+	})
+}
+
+func FailRefreshTokenIsObsolete(c *gin.Context) {
+	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
+		"fail": "Refresh token is obsolete",
+	})
+}
+
 func ExecRegister(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Registration was successful",
+	})
+}
+
+func ErrorOnServer(c *gin.Context) {
+	c.JSON(http.StatusInternalServerError, gin.H{
+		"error": "Error on the server. Please, try again later",
 	})
 }

@@ -22,12 +22,6 @@ func connect(uri string) *mongo.Database {
 	if err != nil {
 		panic(err)
 	}
-	// TODO: продумать когда закрывать подключение к бд
-	//defer func() {
-	//	if err = client.Disconnect(context.TODO()); err != nil {
-	//		panic(err)
-	//	}
-	//}()
 	db := client.Database("GamersAssessment")
 	return db
 }

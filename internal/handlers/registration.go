@@ -46,7 +46,7 @@ func Registration(c *gin.Context) {
 		RegistrationTime: time.Now(),
 	}
 
-	_, err = database.InsertUser(user)
+	err = database.InsertUser(user)
 	if err != nil {
 		http_responses.FailCurrentEmailAlreadyExists(c)
 		return
