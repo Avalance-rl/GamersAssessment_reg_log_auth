@@ -14,12 +14,18 @@ func Init() {
 var CFG Config
 
 type Config struct {
+	HTTPServer   `yaml:"http_server"`
 	Database     `yaml:"database"`
 	JwtSecretKey string `yaml:"jwt_secret_key"`
 }
 
 type Database struct {
 	URI string `yaml:"URI"`
+}
+
+type HTTPServer struct {
+	Address string `yaml:"address"`
+	Port    string `yaml:"port"`
 }
 
 func MustLoad(path string) Config {

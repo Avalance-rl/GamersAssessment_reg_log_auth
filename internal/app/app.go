@@ -13,5 +13,5 @@ func init() {
 
 func Run() {
 	r := services.SetupRouter()
-	r.Run("localhost:8080")
+	r.Run(config.CFG.HTTPServer.Address + config.CFG.HTTPServer.Port)
 }
