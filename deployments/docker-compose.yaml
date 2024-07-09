@@ -1,0 +1,9 @@
+services:
+  reglogauth:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    environment:
+      - GIN_MODE=debug
+    ports:
+      - "8000:8080"

@@ -11,6 +11,24 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// @BasePath /
+
+// Registration godoc
+// @Summary registers a user
+// @Schemes application/json
+// @Description accepts json sent by the user as input and registers it
+// @Tags registration
+// @Accept json
+// @Produce json
+// @Param input body models.RegisterRequest true "account info"
+// @Success 200 "message: Registration was successful"
+// @Failure 400 "error: Failed to read body"
+// @Failure 409 "fail: This email already exists"
+// @Failure 422 "fail: Your email is not valid"
+// @Failure 422 "fail: Your username is not valid"
+// @Failure 422 "fail: Your password is not valid"
+// @Failure 500 "error: Error on the server. Please, try again later"
+// @Router /api/auth/registration [post]
 func Registration(c *gin.Context) {
 	body := models.RegisterRequest{}
 	if c.Bind(&body) != nil {
