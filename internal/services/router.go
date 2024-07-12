@@ -2,6 +2,7 @@ package services
 
 import (
 	_ "dev/reglogauth/docs"
+	"dev/reglogauth/internal/config"
 	"dev/reglogauth/internal/handlers"
 
 	"github.com/gin-contrib/cors"
@@ -13,7 +14,7 @@ import (
 func SetupRouter() *gin.Engine {
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:5173"},
+		AllowOrigins:     []string{config.CFG.AllowOrigins},
 		AllowMethods:     []string{"POST", "GET", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept"},
 		ExposeHeaders:    []string{"Content-Length"},

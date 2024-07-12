@@ -15,6 +15,7 @@ var CFG Config
 
 type Config struct {
 	HTTPServer   `yaml:"http_server"`
+	AllowOrigins string `yaml:"allow_origins"`
 	Database     `yaml:"database"`
 	JwtSecretKey string `yaml:"jwt_secret_key"`
 }
